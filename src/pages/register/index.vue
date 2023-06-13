@@ -1,0 +1,19 @@
+<template>
+  <div>
+    我是注册页
+  </div>
+</template>
+
+<script>
+export default {
+  components: {},
+  data() {
+    return {};
+  },
+  methods: {},
+}
+</script>
+
+<style scoped>
+
+</style>
