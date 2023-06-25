@@ -1,12 +1,16 @@
 <template>
   <div>
-    我是搜索页
+    <type-nav></type-nav>
   </div>
 </template>
 
 <script>
+import typeNav from "@/components/typeNav";
+
 export default {
-  components: {},
+  components: {
+    typeNav
+  },
   data() {
     return {};
   },
