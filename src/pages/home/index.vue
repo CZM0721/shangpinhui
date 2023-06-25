@@ -12,7 +12,7 @@
 
 <script>
 import listContainer from "@/pages/home/listContainer";
-import typeNav from "@/pages/home/typeNav";
+import typeNav from "@/components/typeNav";
 import todayRecommend from "@/pages/home/todayRecommend";
 import Rank from "@/pages/home/rank";
 import Like from "@/pages/home/like";

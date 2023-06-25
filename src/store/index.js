@@ -1,12 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+Vue.use(Vuex)
 import home from "@/store/home";
 
-Vue.use(Vuex)
-
 export default new Vuex.Store({
-    models: {
+    // 实现vuex模块是开发
+    modules: {
         home
     }
 })

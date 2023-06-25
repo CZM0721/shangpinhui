@@ -32,7 +32,7 @@ requests.interceptors.response.use((res) => {
     //进度条结束
     nprogress.done();
     return res.data;
-}, (err) => {
+}, (error) => {
     return Promise.reject(new Error('faile'))
 });
 
