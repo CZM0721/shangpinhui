@@ -1,14 +1,22 @@
 // home的store
-import {getBaseCategoryList} from "@/api";
+import {getBaseCategoryList, getBannerList, getFloorList} from "@/api";
 // state:仓库存储数据的地方
 const state={
-    categoryList:[]
+    categoryList:[],
+    bannerList:[],
+    floorList:[],
 }
 
 // mutations:修改state属性的唯一手段
 const mutations={
     getAnvList(state,categoryList){
         state.categoryList = categoryList
+    },
+    getBannerList(state,bannerList){
+        state.bannerList = bannerList
+    },
+    getFloorList(state,floorList){
+        state.floorList = floorList
     }
 }
 
@@ -19,7 +27,21 @@ const actions={
         if (result.code === 200){
             commit('getAnvList',result.data)
         }
-    }
+    },
+
+    async getBannerList({commit}){
+        let result = await getBannerList()
+        if (result.code === 200){
+            commit('getBannerList',result.data)
+        }
+    },
+
+    async getFloorList({commit}){
+        let result = await getFloorList()
+        if (result.code === 200){
+            commit('getFloorList',result.data)
+        }
+    },
 }
 const getters ={}
 

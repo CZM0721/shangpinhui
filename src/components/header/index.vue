@@ -33,7 +33,7 @@
         </h1>
         <div class="searchArea">
           <form action="###" class="searchForm">
-            <input type="text" id="autocomplete" class="input-error input-xxlarge" />
+            <input type="text" id="autocomplete" v-model="keyword" class="input-error input-xxlarge" />
             <button
                 class="sui-btn btn-xlarge btn-danger"
                 type="button"
@@ -50,13 +50,22 @@
 export default {
   components: {},
   data() {
-    return {};
+    return {
+      keyword:''
+    };
   },
   methods: {
     goSearch(){
-      this.$router.push({
-        path:'/search'
-      })
+      let location = {
+        name:'search',
+        params: {
+          keyword: this.keyword
+        }
+      }
+      if(this.$route.query){
+        location.query = this.$route.query
+      }
+      this.$router.push(location)
     },
   },
 }

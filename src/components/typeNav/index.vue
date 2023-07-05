@@ -117,6 +117,9 @@ export default {
         }
       }
       location.query = query
+      if(this.$route.params){
+        location.params = this.$route.params
+      }
       this.$router.push(location)
     }
 
