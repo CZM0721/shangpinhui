@@ -28,7 +28,6 @@ export default {
     list: {
       immediate: true,
       handler(newVal, oleVal) {
-        console.log(12312312)
         this.$nextTick(() => {
           //初始化Swiper类的实例
           var mySwiper = new Swiper(this.$refs.Swiper, {

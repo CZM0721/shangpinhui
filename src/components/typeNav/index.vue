@@ -103,7 +103,6 @@ export default {
       // 跳转的最优写法：事件的委派+标签的自定义属性
       let element = event.target;
       // dataset获取自定义属性
-      console.log(element.dataset)
       let {categoryname,categoryid1,categoryid2,categoryid3} = element.dataset
       let location = {name:'search'}
       let query = {categoryName:categoryname}

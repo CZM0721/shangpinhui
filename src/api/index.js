@@ -9,3 +9,6 @@ export const getBaseCategoryList = () => requests({url:'/product/getBaseCategory
 export const getBannerList = () => mockAjax({url:'/banner',method:'get'})
 
 export const getFloorList = ()=> mockAjax({url:'/floor',method:'get'})
+
+//获取搜索模块数据
+export const getSearchInfo = (params)=> requests({url:'/list',method:'post',data:params})
