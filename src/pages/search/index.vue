@@ -17,34 +17,30 @@
             <li class="with-x" v-if="searchParams.keyword">
               {{searchParams.keyword}}<i @click="removeKeyword">×</i>
             </li>
+            <li class="with-x" v-if="searchParams.trademark">
+              {{searchParams.trademark.split(':')[1]}}<i @click="removeTrademark">×</i>
+            </li>
+            <li class="with-x" v-for="(item,index) in searchParams.props" :key="item.split(':')[0]">
+              {{item.split(':')[1]}}<i @click="removeProp(index)">×</i>
+            </li>
           </ul>
         </div>
 
         <!--selector-->
-        <SearchSelector />
+        <SearchSelector @trademarkInfo="trademarkInfo" @attrInfo="attrInfo"/>
 
         <!--details-->
         <div class="details clearfix">
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li class="active">
-                  <a href="#">综合</a>
+                <li :class="{active:isOne}" @click="changOrder('1')">
+                  <a href="#">综合<span v-show="isOne" class="iconfont"
+                                      :class="{'icon-down':isDown,'icon-up':isUp}"></span></a>
                 </li>
-                <li>
-                  <a href="#">销量</a>
-                </li>
-                <li>
-                  <a href="#">新品</a>
-                </li>
-                <li>
-                  <a href="#">评价</a>
-                </li>
-                <li>
-                  <a href="#">价格⬆</a>
-                </li>
-                <li>
-                  <a href="#">价格⬇</a>
+                <li :class="{active:isTwo}" @click="changOrder('2')">
+                  <a href="#">价格<span v-show="isTwo" class="iconfont"
+                                      :class="{'icon-down':isDown,'icon-up':isUp}"></span></a>
                 </li>
               </ul>
             </div>
@@ -126,7 +122,7 @@
           "category3Id": "",
           "categoryName": "",
           "keyword": "",
-          "order": "",
+          "order": "1:desc",
           "pageNo": 1,
           "pageSize": 3,
           "props": [],
@@ -139,7 +135,20 @@
       typeNav
     },
     computed:{
-      ...mapGetters(['goodsList','trademarkList'])
+      ...mapGetters(['goodsList','trademarkList']),
+
+      isOne(){
+        return this.searchParams.order.indexOf('1')!==-1
+      },
+      isTwo(){
+        return this.searchParams.order.indexOf('2')!==-1
+      },
+      isDown(){
+        return this.searchParams.order.indexOf('desc')!==-1
+      },
+      isUp(){
+        return this.searchParams.order.indexOf('asc')!==-1
+      },
     },
     watch:{
       $route(newVal,oldVal){
@@ -172,6 +181,43 @@
           this.$router.push({name:'search',query: this.$route.query})
         }
       },
+
+      // 根据品牌进行搜索
+      trademarkInfo(trademark){
+        this.searchParams.trademark = `${trademark.tmId}:${trademark.tmName}`
+        this.getData()
+      },
+
+      // 删除品牌进行搜索
+      removeTrademark(){
+        this.searchParams.trademark = undefined
+        this.getData()
+      },
+
+      // 根据商品属性进行搜索
+      attrInfo(attr,attrValue){
+        let prop=`${attr.attrId}:${attrValue}:${attr.attrName}`
+        if(this.searchParams.props.indexOf(prop)===-1){
+          this.searchParams.props.push(prop)
+        }
+        this.getData()
+      },
+
+      removeProp(index){
+        this.searchParams.props.splice(index,1)
+        this.getData()
+      },
+
+      // 排序
+      changOrder(value){
+        if(this.searchParams.order.indexOf(value)!==-1){
+          this.searchParams.order = `${value}:${this.searchParams.order.split(':')[1]==='desc'?'asc':'desc'}`
+        }else {
+          this.searchParams.order = `${value}:desc`
+        }
+        this.getData()
+      },
+
     },
 
   }
