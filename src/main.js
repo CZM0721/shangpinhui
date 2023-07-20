@@ -5,9 +5,13 @@ import router from "@/router";
 
 import store from "@/store";
 
+import pagination from "@/components/pagination";
+
 import 'swiper/css/swiper.css'
 
 import '@/mock/mockService.js'
+
+Vue.component(pagination.name,pagination)
 
 Vue.config.productionTip = false
 
